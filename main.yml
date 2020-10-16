@@ -1,4 +1,4 @@
-- hosts: cent7
+- hosts: centos77
   tasks:
   - name: Install Git and python3
     yum: 
@@ -8,6 +8,7 @@
     
   - name: upgrade all packages
     yum: name=* state=latest
+    ignore_errors: yes
 
   - name: Install httpd
     yum:
@@ -46,6 +47,8 @@
    
   - name: chown
     shell: chown -R apache:apache /var/www/html
+    ignore_errors: yes
 
   - name: Run app
-    command: python app.py chdir=/var/www/html
+    command: python app.py chdir=/var/www/html/
+    
